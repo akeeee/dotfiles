@@ -1,6 +1,9 @@
 @RTK.md
 @STANDARDS.md
 
+## Docs
+Always use context7 MCP to verify API usage before writing code for any library or framework.
+
 ## Default Stack
 Unless project context says otherwise, assume:
 - Frontend: Next.js (App Router, TypeScript, Tailwind)
