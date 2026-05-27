@@ -14,6 +14,7 @@ Then finish setup:
 # Claude plugins
 claude plugins install caveman@caveman
 claude plugins install mempalace@mempalace
+claude plugins install ecc@ecc
 
 # Vim — install plugins (run inside vim)
 :PlugInstall
@@ -73,6 +74,8 @@ Claude Code is Anthropic's AI coding CLI. This setup makes it faster, safer, and
 - **Tests**: RSpec (backend), Jest (frontend)
 
 Key Rails rules baked in: always generate migrations (never edit `schema.rb` directly), fat models / thin controllers, service objects for business logic.
+
+`CLAUDE.md` also loads `@STANDARDS.md` — so code quality rules (naming, layers, async, security) apply automatically every session without being stated in each prompt.
 
 ### MCP Servers
 
@@ -137,6 +140,7 @@ Used in both `lint-on-write.sh` (fires when Claude writes a file) and `.nano-sta
 |--------|-------------|
 | [caveman](https://github.com/JuliusBrussee/caveman) | Makes Claude respond in terse "caveman" style. Drops filler words and articles. Cuts token usage ~75% while keeping all technical accuracy. |
 | [mempalace](https://github.com/milla-jovovich/mempalace) | Persistent memory across Claude sessions. Stores facts, preferences, and project context in a searchable knowledge graph. |
+| [ecc](https://github.com/affaan-m/ECC) | Everything Claude Code — large skill/agent/hook library. Adds `/ecc:plan`, `/ecc:feature-dev`, `/ecc:security-scan`, and 200+ other workflow skills. |
 | frontend-design | Skill for generating production-quality UI code with high design quality. |
 | ruby-lsp | Ruby LSP integration for code intelligence in Ruby projects. |
 | rust-analyzer-lsp | Rust analyzer integration for Rust projects. |

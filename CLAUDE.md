@@ -1,4 +1,5 @@
 @RTK.md
+@STANDARDS.md
 
 ## Stack
 - Frontend: JavaScript (ES modules, Stimulus, Hotwire Turbo)
