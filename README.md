@@ -64,6 +64,29 @@ Built on top of [gpakosz/.tmux](https://github.com/gpakosz/.tmux) — a framewor
 
 Claude Code is Anthropic's AI coding CLI. This setup makes it faster, safer, and cheaper to run.
 
+### Stack Context
+
+`CLAUDE.md` tells Claude the tech stack so it defaults to correct conventions:
+
+- **Frontend**: JavaScript — ES modules, Stimulus, Hotwire Turbo
+- **Backend**: Ruby on Rails — MVC, ActiveRecord, Turbo Streams
+- **Tests**: RSpec (backend), Jest (frontend)
+
+Key Rails rules baked in: always generate migrations (never edit `schema.rb` directly), fat models / thin controllers, service objects for business logic.
+
+### MCP Servers
+
+`mcp.json` wires in four servers that load automatically:
+
+| Server | What it does |
+|--------|-------------|
+| `context7` | Pulls live Rails/JS docs into context — stops Claude hallucinating old APIs |
+| `playwright` | E2E browser automation for testing Turbo/Stimulus UI |
+| `sequential-thinking` | Step-by-step reasoning for complex migrations and architecture decisions |
+| `github` | Reads PR and issue context without leaving the terminal |
+
+> **Note:** `github` MCP needs `GITHUB_PERSONAL_ACCESS_TOKEN` set in your environment.
+
 ### Why hooks instead of instructions?
 
 AI models forget written rules when context gets long. Hooks are shell scripts that run automatically at specific points — they enforce rules with code, not text. The model cannot skip them.
