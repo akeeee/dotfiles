@@ -100,7 +100,10 @@
     "caveman@caveman": true,
     "mempalace@mempalace": true,
     "ruby-lsp@claude-plugins-official": true,
-    "code-review@claude-plugins-official": true
+    "code-review@claude-plugins-official": true,
+    "code-modernization@claude-plugins-official": true,
+    "hookify@claude-plugins-official": true,
+    "ecc@ecc": true
   },
   "extraKnownMarketplaces": {
     "caveman": {
@@ -113,6 +116,12 @@
       "source": {
         "source": "github",
         "repo": "milla-jovovich/mempalace"
+      }
+    },
+    "ecc": {
+      "source": {
+        "source": "github",
+        "repo": "affaan-m/ECC"
       }
     }
   },
