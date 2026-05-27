@@ -25,6 +25,7 @@ echo ""
 
 # Core config
 link_or_copy "$DOTFILES_DIR/settings.json"   "$CLAUDE_DIR/settings.json"
+link_or_copy "$DOTFILES_DIR/mcp.json"        "$CLAUDE_DIR/mcp.json"
 link_or_copy "$DOTFILES_DIR/CLAUDE.md"       "$CLAUDE_DIR/CLAUDE.md"
 link_or_copy "$DOTFILES_DIR/STANDARDS.md"    "$CLAUDE_DIR/STANDARDS.md"
 link_or_copy "$DOTFILES_DIR/RTK.md"          "$CLAUDE_DIR/RTK.md"
