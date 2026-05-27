@@ -67,8 +67,15 @@ Claude Code is Anthropic's AI coding CLI. This setup makes it faster, safer, and
 
 ### Stack Context
 
-`CLAUDE.md` tells Claude the tech stack so it defaults to correct conventions:
+`CLAUDE.md` tells Claude the tech stack so it defaults to correct conventions.
 
+**Default stack** (used unless project context says otherwise):
+- **Frontend**: Next.js — App Router, TypeScript, Tailwind
+- **Backend**: Next.js API routes / Server Actions
+- **Database**: Supabase (Postgres + Auth + Storage)
+- **Deploy**: Vercel
+
+**Also used** (Rails projects):
 - **Frontend**: JavaScript — ES modules, Stimulus, Hotwire Turbo
 - **Backend**: Ruby on Rails — MVC, ActiveRecord, Turbo Streams
 - **Tests**: RSpec (backend), Jest (frontend)

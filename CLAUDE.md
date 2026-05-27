@@ -1,7 +1,14 @@
 @RTK.md
 @STANDARDS.md
 
-## Stack
+## Default Stack
+Unless project context says otherwise, assume:
+- Frontend: Next.js (App Router, TypeScript, Tailwind)
+- Backend: Next.js API routes / Server Actions
+- Database: Supabase (Postgres + Auth + Storage)
+- Deploy: Vercel
+
+## Rails Stack (when in a Rails project)
 - Frontend: JavaScript (ES modules, Stimulus, Hotwire Turbo)
 - Backend: Ruby on Rails (MVC, ActiveRecord, Turbo Streams)
 - Tests: RSpec (backend), Jest (frontend)
