@@ -1,19 +1,25 @@
-# claude-dotfiles
+# dotfiles
 
-Personal Claude Code configuration — hooks, standards, commands, and templates.
+Personal dev environment — Claude Code, Vim, Tmux.
 
 ## Install
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/claude-dotfiles
-cd claude-dotfiles
-bash install.sh
+git clone git@github.com:akeeee/dotfiles.git ~/dotfiles
+cd ~/dotfiles && bash install.sh
 ```
 
-Then install plugins:
+Then finish setup:
 ```bash
+# Claude plugins
 claude plugins install caveman@caveman
 claude plugins install mempalace@mempalace
+
+# Vim plugins (inside vim)
+:PlugInstall
+
+# Tmux — reload config
+tmux source ~/.tmux.conf
 ```
 
 Use `--force` to overwrite existing files:
@@ -26,8 +32,13 @@ bash install.sh --force
 ## Structure
 
 ```
-~/.claude/
-├── settings.json          # Hook wiring, plugins, theme
+~/dotfiles/
+├── vim/
+│   └── vimrc              → ~/.vimrc (vim-plug, gruvbox, NERDTree, fzf, fugitive)
+├── tmux/
+│   └── tmux.conf.local    → ~/.tmux.conf.local (gpakosz/.tmux customisations)
+└── claude/                (installed to ~/.claude)
+    ├── settings.json          # Hook wiring, plugins, theme
 ├── CLAUDE.md              # Global Claude instructions (points to RTK.md)
 ├── STANDARDS.md           # Code quality standards injected into new projects
 ├── RTK.md                 # RTK token proxy documentation

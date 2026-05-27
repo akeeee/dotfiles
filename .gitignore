@@ -21,6 +21,11 @@ hooks/caveman-stats.js
 hooks/caveman-statusline.sh
 hooks/package.json
 
+# Vim — plugins installed via :PlugInstall, not committed
+vim/plugged/
+.vim/plugged/
+.vim/.netrwhist
+
 # Secrets
 *.key
 *.pem

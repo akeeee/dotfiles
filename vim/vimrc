@@ -1,0 +1,273 @@
+" =========================
+" Plugins
+" =========================
+call plug#begin('~/.vim/plugged')
+
+" Appearance
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'morhetz/gruvbox'
+Plug 'Yggdroot/indentLine'
+
+" File navigation
+Plug 'scrooloose/nerdtree'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+" Editing helpers
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
+Plug 'jiangmiao/auto-pairs'
+
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+" Syntax
+Plug 'sheerun/vim-polyglot'
+
+call plug#end()
+
+
+" =========================
+" Colors & Theme
+" =========================
+set background=dark
+set termguicolors
+colorscheme gruvbox
+let g:gruvbox_contrast_dark='medium'
+let g:gruvbox_invert_selection=0
+
+
+" =========================
+" UI / Appearance
+" =========================
+set number
+set relativenumber
+set numberwidth=4
+set signcolumn=yes
+set cursorline
+set scrolloff=8
+set sidescrolloff=5
+set laststatus=2
+set showcmd
+set showmatch
+set ruler
+set wildmenu
+set wildmode=list:longest,full
+set splitbelow
+set splitright
+
+
+" =========================
+" Airline (status bar)
+" =========================
+let g:airline_theme='gruvbox'
+let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#formatter='unique_tail'
+let g:airline#extensions#gitgutter#enabled=1
+let g:airline#extensions#branch#enabled=1
+
+
+" =========================
+" Search
+" =========================
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+" Clear highlight after search
+nnoremap <silent> <Esc> :nohlsearch<CR>
+" Search word under cursor with ripgrep
+nnoremap <leader>* :Rg <C-r><C-w><CR>
+
+
+" =========================
+" Editing
+" =========================
+set expandtab
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set autoindent
+set smartindent
+set backspace=indent,eol,start
+set encoding=utf-8
+set clipboard=unnamed
+
+
+" =========================
+" Files
+" =========================
+set nobackup
+set noswapfile
+set autoread
+set hidden
+
+
+" =========================
+" Leader
+" =========================
+let mapleader=" "
+
+
+" =========================
+" NERDTree
+" =========================
+let g:NERDTreeDirArrowExpandable='▸'
+let g:NERDTreeDirArrowCollapsible='▾'
+let g:NERDTreeShowHidden=1
+let g:NERDTreeMinimalUI=1
+let g:NERDTreeIgnore=['\.git$', '\.DS_Store$', 'node_modules$']
+
+nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <leader>nf :NERDTreeFind<CR>
+
+" Auto-open NERDTree when vim starts
+autocmd VimEnter * NERDTree | wincmd p
+
+
+" =========================
+" FZF + Ripgrep
+" =========================
+set rtp+=/opt/homebrew/opt/fzf
+
+" File search
+nnoremap <C-p>     :Files<CR>
+nnoremap <leader>f :Files<CR>
+" Word/text search
+nnoremap <leader>g :Rg<CR>
+" Buffer list
+nnoremap <leader>b :Buffers<CR>
+" File history
+nnoremap <leader>h :History<CR>
+" Search current buffer lines
+nnoremap <leader>/  :BLines<CR>
+" Git commits
+nnoremap <leader>gc :Commits<CR>
+" Commands palette
+nnoremap <leader>c :Commands<CR>
+
+" Rg with live preview window
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>),
+  \   1, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
+
+" Files with preview
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+
+" =========================
+" IndentLine
+" =========================
+let g:indentLine_char='▏'
+
+
+" =========================
+" GitGutter
+" =========================
+set updatetime=100
+let g:gitgutter_sign_added='▎'
+let g:gitgutter_sign_modified='▎'
+let g:gitgutter_sign_removed='▎'
+let g:gitgutter_sign_removed_first_line='▎'
+
+nnoremap <leader>gn :GitGutterNextHunk<CR>
+nnoremap <leader>gp :GitGutterPrevHunk<CR>
+nnoremap <leader>gs :GitGutterStageHunk<CR>
+nnoremap <leader>gu :GitGutterUndoHunk<CR>
+
+
+" =========================
+" Fugitive (Git)
+" =========================
+nnoremap <leader>gb :Git blame<CR>
+nnoremap <leader>gd :Gdiffsplit<CR>
+nnoremap <leader>gl :Git log --oneline<CR>
+
+
+" =========================
+" Split Navigation
+" =========================
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Resize splits
+nnoremap <leader>= <C-w>=
+nnoremap <Up>    :resize +2<CR>
+nnoremap <Down>  :resize -2<CR>
+nnoremap <Left>  :vertical resize -2<CR>
+nnoremap <Right> :vertical resize +2<CR>
+
+
+" =========================
+" Buffer Navigation
+" =========================
+nnoremap <Tab>   :bnext<CR>
+nnoremap <S-Tab> :bprev<CR>
+nnoremap <leader>q :bdelete<CR>
+
+
+" =========================
+" Quick Save / Quit
+" =========================
+nnoremap <leader>w :w<CR>
+nnoremap <leader>x :wq<CR>
+nnoremap <leader>Q :q!<CR>
+
+
+" =========================
+" Move Lines
+" =========================
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+
+
+" =========================
+" Folding
+" =========================
+set foldmethod=indent
+set foldnestmax=3
+set nofoldenable
+
+
+" =========================
+" Mouse
+" =========================
+set mouse=a
+
+
+" =========================
+" Misc
+" =========================
+" Yank to end of line (consistent with C and D)
+nnoremap Y y$
+
+" Keep cursor centered when jumping
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" Reselect after indent in visual mode
+vnoremap < <gv
+vnoremap > >gv
+
+" Quick escape from insert mode
+inoremap jk <Esc>
+inoremap kj <Esc>
+
+" Auto-install missing plugins on startup
+autocmd VimEnter *
+  \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \|   PlugInstall --sync | q
+  \| endif
+
+" Remove trailing whitespace on save
+autocmd BufWritePre * :%s/\s\+$//e
