@@ -138,3 +138,5 @@ Rules that oxlint can catch automatically are enforced by hooks — only judgmen
 | `/architect` | Reviews project structure, layer separation, and scalability |
 | `/quality-check` | Runs a multi-agent code quality review on local files |
 | `/refactor` | Refactors the current file following project standards |
+| `/polish` | Analyzes code against Clean Code + SOLID/DRY/KISS — shows proposal table, waits confirm, then applies |
+| `/improve` | Full pipeline: quality audit → design principles → security scan → final cleanup. Each step confirms before applying |
