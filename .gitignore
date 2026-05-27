@@ -1,0 +1,28 @@
+# Runtime state
+.caveman-active
+.caveman-statusline-suffix
+.last-cleanup
+
+# Personal / ephemeral
+memory/
+plans/
+backups/
+cache/
+file-history/
+downloads/
+stats-cache.json
+mcp-needs-auth-cache.json
+
+# Plugin internals (installed via plugin manager, not committed)
+hooks/caveman-activate.js
+hooks/caveman-config.js
+hooks/caveman-mode-tracker.js
+hooks/caveman-stats.js
+hooks/caveman-statusline.sh
+hooks/package.json
+
+# Secrets
+*.key
+*.pem
+*.p12
+credentials.yml.enc
