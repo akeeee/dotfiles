@@ -26,8 +26,10 @@ vim/plugged/
 .vim/plugged/
 .vim/.netrwhist
 
-# Secrets
+# Secrets — never commit these
 *.key
 *.pem
 *.p12
 credentials.yml.enc
+shell/.secrets
+.secrets
