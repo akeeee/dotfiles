@@ -1,4 +1,5 @@
 {
+  "model": "sonnet",
   "hooks": {
     "PreToolUse": [
       {
@@ -47,6 +48,12 @@
             "command": "node \"$CLAUDE_CONFIG_DIR/hooks/caveman-mode-tracker.js\"",
             "timeout": 5,
             "statusMessage": "Tracking caveman mode..."
+          },
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_CONFIG_DIR/hooks/grammar-reminder.js\"",
+            "timeout": 5,
+            "statusMessage": "Checking grammar..."
           }
         ]
       }
@@ -92,7 +99,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "bash \"$CLAUDE_CONFIG_DIR/hooks/caveman-statusline.sh\""
+    "command": "bash \"${CLAUDE_CONFIG_DIR:-$HOME/.claude}/hooks/statusline.sh\""
   },
   "enabledPlugins": {
     "frontend-design@claude-plugins-official": true,
@@ -103,7 +110,10 @@
     "code-review@claude-plugins-official": true,
     "code-modernization@claude-plugins-official": true,
     "hookify@claude-plugins-official": true,
-    "ecc@ecc": true
+    "impeccable@impeccable": true,
+    "andrej-karpathy-skills@karpathy-skills": true,
+    "mattpocock-skills@mattpocock": true,
+    "grammar-fix@grammar-fix": true
   },
   "extraKnownMarketplaces": {
     "caveman": {
@@ -122,6 +132,30 @@
       "source": {
         "source": "github",
         "repo": "affaan-m/ECC"
+      }
+    },
+    "impeccable": {
+      "source": {
+        "source": "github",
+        "repo": "pbakaus/impeccable"
+      }
+    },
+    "karpathy-skills": {
+      "source": {
+        "source": "github",
+        "repo": "forrestchang/andrej-karpathy-skills"
+      }
+    },
+    "mattpocock": {
+      "source": {
+        "source": "github",
+        "repo": "mattpocock/skills"
+      }
+    },
+    "grammar-fix": {
+      "source": {
+        "source": "github",
+        "repo": "akeeee/grammar-fix"
       }
     }
   },
