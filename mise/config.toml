@@ -1,0 +1,21 @@
+# Global tool versions. Projects override with their own mise.toml / .ruby-version / .nvmrc.
+# Symlinked to ~/.config/mise/config.toml by install.sh.
+
+[tools]
+ruby = "3.4.8"
+node = "lts"
+bun = "latest"
+pnpm = "latest"
+python = "3.11"
+go = "latest"
+
+# Global CLIs that used to live in ~/.npm-global
+"npm:hunkdiff" = "latest"
+"npm:vercel" = "latest"
+"npm:mjml" = "latest"
+"npm:yarn" = "1"
+"npm:@earendil-works/pi-coding-agent" = "latest"
+
+[settings]
+# Let .ruby-version / .nvmrc pick versions without a mise.toml in every repo
+idiomatic_version_file_enable_tools = ["ruby", "node"]

@@ -141,6 +141,11 @@ if ! command -v brew &>/dev/null; then
 fi
 brew bundle --file="$DOTFILES/Brewfile"
 
+# ── mise (languages + global npm CLIs) ────────────────────
+echo "[mise]"
+symlink "$DOTFILES/mise/config.toml" "$HOME/.config/mise/config.toml"
+/opt/homebrew/bin/mise install
+
 # ── Vim ───────────────────────────────────────────────────
 echo "[vim]"
 symlink "$DOTFILES/vim/vimrc" "$HOME/.vimrc"

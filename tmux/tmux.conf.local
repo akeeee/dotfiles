@@ -68,23 +68,23 @@ tmux_conf_24b_colour=auto
 tmux_conf_theme=enabled
 
 # default theme
-tmux_conf_theme_colour_1="#080808"    # dark gray
-tmux_conf_theme_colour_2="#303030"    # gray
-tmux_conf_theme_colour_3="#8a8a8a"    # light gray
-tmux_conf_theme_colour_4="#00afff"    # light blue
-tmux_conf_theme_colour_5="#ffff00"    # yellow
-tmux_conf_theme_colour_6="#080808"    # dark gray
-tmux_conf_theme_colour_7="#e4e4e4"    # white
-tmux_conf_theme_colour_8="#080808"    # dark gray
-tmux_conf_theme_colour_9="#ffff00"    # yellow
-tmux_conf_theme_colour_10="#ff00af"   # pink
-tmux_conf_theme_colour_11="#5fff00"   # green
-tmux_conf_theme_colour_12="#8a8a8a"   # light gray
-tmux_conf_theme_colour_13="#e4e4e4"   # white
-tmux_conf_theme_colour_14="#080808"   # dark gray
-tmux_conf_theme_colour_15="#080808"   # dark gray
-tmux_conf_theme_colour_16="#d70000"   # red
-tmux_conf_theme_colour_17="#e4e4e4"   # white
+tmux_conf_theme_colour_1="#282828"    # gruvbox bg hard
+tmux_conf_theme_colour_2="#3c3836"    # gruvbox bg1
+tmux_conf_theme_colour_3="#928374"    # gruvbox gray
+tmux_conf_theme_colour_4="#83a598"    # gruvbox blue (aqua)
+tmux_conf_theme_colour_5="#fabd2f"    # gruvbox yellow
+tmux_conf_theme_colour_6="#282828"    # gruvbox bg hard
+tmux_conf_theme_colour_7="#ebdbb2"    # gruvbox fg
+tmux_conf_theme_colour_8="#282828"    # gruvbox bg hard
+tmux_conf_theme_colour_9="#fabd2f"    # gruvbox yellow
+tmux_conf_theme_colour_10="#d3869b"   # gruvbox purple
+tmux_conf_theme_colour_11="#b8bb26"   # gruvbox green
+tmux_conf_theme_colour_12="#928374"   # gruvbox gray
+tmux_conf_theme_colour_13="#ebdbb2"   # gruvbox fg
+tmux_conf_theme_colour_14="#282828"   # gruvbox bg hard
+tmux_conf_theme_colour_15="#282828"   # gruvbox bg hard
+tmux_conf_theme_colour_16="#cc241d"   # gruvbox red
+tmux_conf_theme_colour_17="#ebdbb2"   # gruvbox fg
 
 # default theme (ansi)
 #tmux_conf_theme_colour_1="colour0"
@@ -215,14 +215,14 @@ tmux_conf_theme_window_status_last_bg="$tmux_conf_theme_colour_2"
 tmux_conf_theme_window_status_last_attr="none"
 
 # status left/right sections separators
-tmux_conf_theme_left_separator_main=""
-tmux_conf_theme_left_separator_sub="|"
-tmux_conf_theme_right_separator_main=""
-tmux_conf_theme_right_separator_sub="|"
-#tmux_conf_theme_left_separator_main='\uE0B0'  # /!\ you don't need to install Powerline
-#tmux_conf_theme_left_separator_sub='\uE0B1'   #   you only need fonts patched with
-#tmux_conf_theme_right_separator_main='\uE0B2' #   Powerline symbols or the standalone
-#tmux_conf_theme_right_separator_sub='\uE0B3'  #   PowerlineSymbols.otf font, see README.md
+#tmux_conf_theme_left_separator_main=""
+#tmux_conf_theme_left_separator_sub="|"
+#tmux_conf_theme_right_separator_main=""
+#tmux_conf_theme_right_separator_sub="|"
+tmux_conf_theme_left_separator_main='\uE0B0'  # powerline arrow right
+tmux_conf_theme_left_separator_sub='\uE0B1'
+tmux_conf_theme_right_separator_main='\uE0B2' # powerline arrow left
+tmux_conf_theme_right_separator_sub='\uE0B3'
 
 # status left/right content:
 #   - separate main sections with "|"
@@ -346,22 +346,60 @@ tmux_conf_theme_clock_style="24"
 #   - disabled
 # on macOS, this requires installing reattach-to-user-namespace, see README.md
 # on Linux, this requires xsel, xclip or wl-copy
-tmux_conf_copy_to_os_clipboard=false
+tmux_conf_copy_to_os_clipboard=true
 
 
 # -- user customizations -------------------------------------------------------
 # this is the place to override or undo settings
 
 # increase history size
-#set -g history-limit 10000
+set -g history-limit 50000
 
-# start with mouse mode enabled
-#set -g mouse on
+# enable mouse mode
+set -g mouse on
 
-# force Vi mode
-#   really you should export VISUAL or EDITOR environment variable, see manual
-#set -g status-keys vi
-#set -g mode-keys vi
+# Vi mode keys
+set -g status-keys vi
+set -g mode-keys vi
+
+# Vi copy mode bindings
+bind-key -T copy-mode-vi v   send-keys -X begin-selection
+bind-key -T copy-mode-vi y   send-keys -X copy-pipe-and-cancel "pbcopy"
+bind-key -T copy-mode-vi r   send-keys -X rectangle-toggle
+bind-key -T copy-mode-vi Escape send-keys -X cancel
+
+# Quick pane splits (stay in current dir)
+bind | split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
+
+# New window retains path
+bind c new-window -c "#{pane_current_path}" #!important
+
+# Pane resizing with vim keys
+bind -r H resize-pane -L 5
+bind -r J resize-pane -D 5
+bind -r K resize-pane -U 5
+bind -r L resize-pane -R 5
+
+# Fast pane switching without prefix (Alt+vim keys)
+bind -n M-h select-pane -L
+bind -n M-j select-pane -D
+bind -n M-k select-pane -U
+bind -n M-l select-pane -R
+
+# Clear pane screen + scrollback; tmux resets the pane itself, so it works
+# even when a foreground app (rails server) ignores C-l
+bind C-k send-keys -R \; clear-history
+
+# Quick reload
+bind R source-file ~/.tmux.conf \; display "Config reloaded!"
+
+# Search mode (open copy mode and search up)
+bind / copy-mode \; send-key ?
+
+# Git popups in current pane's dir: lazygit (stage/commit/push), hunk (review diff)
+bind g display-popup -E -w 90% -h 90% -d "#{pane_current_path}" lazygit
+bind G display-popup -E -w 90% -h 90% -d "#{pane_current_path}" "hunk diff"
 
 # replace C-b by C-a instead of using both prefixes
 # set -gu prefix2

@@ -8,20 +8,14 @@ brew "tmux"
 brew "vim"
 brew "coreutils"
 brew "superfile"
+brew "lazygit"
 
 # Dev
-brew "node"
-brew "pnpm"
 brew "redis"
 brew "postgresql@17"
 brew "memcached"
 brew "libpq"
-brew "docker"
-brew "docker-completion"
 brew "imagemagick"
-
-# Ruby / Rails
-brew "ruby"
 
 # Tools
 brew "rtk"
@@ -36,5 +30,3 @@ brew "anycable-go"
 # Casks
 cask "ghostty"
 cask "ngrok"
-cask "temurin"
-cask "zulu@17"

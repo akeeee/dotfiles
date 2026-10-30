@@ -55,6 +55,7 @@ tmux source ~/.tmux.conf
 | Git | `git/.gitconfig`, `git/.gitignore_global` | `~/.gitconfig`, `~/.gitignore_global` |
 | Claude | `settings.json`, `mcp.json`, `CLAUDE.md`, `STANDARDS.md`, `RTK.md`, hooks, commands, templates | `~/.claude/` |
 | Homebrew | `Brewfile` | installs packages |
+| mise | `mise/config.toml` | `~/.config/mise/config.toml` — ruby, node, bun, pnpm, python, go, global npm CLIs |
 | Vim | `vim/vimrc` | `~/.vimrc` |
 | Tmux | `tmux/tmux.conf.local` | `~/.tmux.conf.local` |
 | macOS | `macos/defaults.sh` | prompts before applying |
